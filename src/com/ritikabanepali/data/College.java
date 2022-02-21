@@ -21,6 +21,7 @@ public class College {
     private String logoURL;
     private int acceptanceRate;
     private int gradRate;
+    private String link;
     
     //this is a constructor
     public College(
@@ -34,7 +35,8 @@ public class College {
         String zipcode,
         String logoURL,
         int acceptanceRate,
-        int gradRate) 
+        int gradRate,
+        String link) 
     {
         this.name = name;
         this.tuition = tuition;
@@ -47,6 +49,7 @@ public class College {
         this.logoURL = logoURL;
         this.acceptanceRate = acceptanceRate;
         this.gradRate = gradRate;
+        this.link = link;
         
     }
     
@@ -82,5 +85,8 @@ public class College {
     }
     public String getZipcode(){
         return zipcode;
+    }
+    public String getLink(){
+        return link;
     }
 }

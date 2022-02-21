@@ -6,9 +6,18 @@ package com.ritikabanepali.gui;
 
 import com.ritikabanepali.data.College;
 import com.ritikabanepali.data.CollegeData;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import static java.awt.SystemColor.text;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,154 +52,237 @@ public class FirstPanel extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        searchField = new javax.swing.JTextField();
+        jScrollBar1 = new javax.swing.JScrollBar();
+        jMenu4 = new javax.swing.JMenu();
         searchButton = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        iconContainer = new javax.swing.JPanel();
         collegeIcon = new javax.swing.JLabel();
-        collegeOutput = new javax.swing.JTextArea();
         collegesList = new javax.swing.JComboBox<>();
+        title = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        collegeOutput = new javax.swing.JTextArea();
+        hyperlink = new javax.swing.JLabel();
+        menu = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
+        jMenu4.setText("jMenu4");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Find College");
+        setBounds(new java.awt.Rectangle(0, 0, 300, 300));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        setName("GUI"); // NOI18N
+        setResizable(false);
 
-        searchField.setToolTipText("Enter College or City");
-        searchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchFieldActionPerformed(evt);
-            }
-        });
-
+        searchButton.setForeground(new java.awt.Color(107, 96, 73));
         searchButton.setText("Search");
-        searchButton.setToolTipText("");
+        searchButton.setToolTipText("click"); // NOI18N
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
             }
         });
 
+        clearButton.setForeground(new java.awt.Color(107, 96, 73));
         clearButton.setText("Clear");
-        clearButton.setToolTipText("");
+        clearButton.setToolTipText("click");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
 
-        collegeOutput.setColumns(20);
-        collegeOutput.setRows(5);
-        collegeOutput.setPreferredSize(new java.awt.Dimension(178, 899));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(390, Short.MAX_VALUE)
-                .addComponent(collegeIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(collegeOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+        javax.swing.GroupLayout iconContainerLayout = new javax.swing.GroupLayout(iconContainer);
+        iconContainer.setLayout(iconContainerLayout);
+        iconContainerLayout.setHorizontalGroup(
+            iconContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(iconContainerLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(collegeIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(collegeIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(714, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(collegeOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+        iconContainerLayout.setVerticalGroup(
+            iconContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(collegeIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
         );
 
         collegesList.setEditable(true);
+        collegesList.setForeground(new java.awt.Color(104, 86, 59));
         collegesList.setModel(model);
-        collegesList.setToolTipText("");
+        collegesList.setToolTipText("Enter name, state, or city of school");
         collegesList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 collegesListActionPerformed(evt);
             }
         });
 
+        title.setFont(new java.awt.Font("Perpetua", 0, 48)); // NOI18N
+        title.setForeground(new java.awt.Color(104, 86, 59));
+        title.setText("Find Your College");
+
+        collegeOutput.setBackground(new java.awt.Color(255, 244, 250));
+        collegeOutput.setColumns(20);
+        collegeOutput.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        collegeOutput.setForeground(new java.awt.Color(105, 87, 59));
+        collegeOutput.setRows(5);
+        collegeOutput.setTabSize(9);
+        collegeOutput.setToolTipText("Information Displayed");
+        collegeOutput.setAlignmentX(2.0F);
+        collegeOutput.setAlignmentY(2.0F);
+        collegeOutput.setAutoscrolls(false);
+        collegeOutput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(186, 175, 164)));
+        collegeOutput.setDragEnabled(true);
+        collegeOutput.setName(""); // NOI18N
+        collegeOutput.setPreferredSize(new java.awt.Dimension(0, 300));
+        collegeOutput.setRequestFocusEnabled(false);
+        jScrollPane1.setViewportView(collegeOutput);
+
+        hyperlink.setText("college url");
+
+        menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        menu.setToolTipText("");
+
+        jMenu2.setText("Search");
+        menu.add(jMenu2);
+
+        jMenu3.setText("Compare ");
+        menu.add(jMenu3);
+
+        setJMenuBar(menu);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(collegesList, javax.swing.GroupLayout.Alignment.LEADING, 0, 230, Short.MAX_VALUE)
-                            .addComponent(searchField, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(112, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(iconContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(collegesList, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 19, Short.MAX_VALUE)))
+                .addGap(34, 34, 34))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(title)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(hyperlink)
+                .addGap(133, 133, 133))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(collegesList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(searchButton)
-                            .addComponent(clearButton))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(collegesList, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iconContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(hyperlink)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchFieldActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         System.out.println("Search Button Clicked");       
         List<College> collegeData = findCollege((String)collegesList.getSelectedItem());
         collegeOutput.setText(null);
         if(collegeData.isEmpty()){
-            collegeOutput.append("Not Found!"); 
+            collegeOutput.append(" Please enter a valid College"); 
+            updateCollegeIcon("./pics/notfoundLogo.png");
         }
         else{
             for(College c : collegeData){
-                updateCollegeIcon("https://air-marketing-assets.s3.amazonaws.com/blog/logo-db/ut-austin-logo/ut-austin-logo-png-2.png");
-                collegeOutput.append( "College Name: " + c.getName()
-                    + "\nAddress: " +  c.getCity()
+                updateCollegeIcon(c.getLogoURL());
+                setURL(c.getLink());
+                collegeOutput.append( " College Name: " + c.getName()
+                    + "\n Address: " +  c.getCity()
                     + ", "
                     + c.getState() 
                     + " " +c.getZipcode()
-                    +"\nTuition: $" + c.getTuition()
-                    + "\nCollege Size: " + c.getSize()
-                    + "\nHas Bachelors Program? "
+                    +"\n Tuition: $" + c.getTuition()
+                    + "\n College Size: " + c.getSize()
+                    + "\n Has Bachelors Program? "
                     + c.getHasBachelors() 
-                    + "\nHas Masters Program? " 
+                    + "\n Has Masters Program? " 
                     + c.getHasMasters()
-                    + "\nAcceptance Rate: " 
+                    + "\n Acceptance Rate: " 
                     + c.getAcceptanceRate() + "%"
-                    + "\nGraduation Rate: "
+                    + "\n Graduation Rate: "
                     + c.getGradRate() + "%"
-                    + "\n\n");     
+                    + "\n\n"); 
             }
         }
+       
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void collegesListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_collegesListActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_collegesListActionPerformed
 
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+                    System.out.println("Cancel Button Clicked");
+                    collegeOutput.setText(null);
+                    collegeOutput.setText(null);
+                    updateCollegeIcon("./pics/notfoundLogo.png");
+                    setURL(" ");
+                     // TODO: "enter college" logo
+                     // TODO: look up how to search all TODOs in NetBeans
+                     // TODO: get rid of scroll bar when less than one college
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void setURL(String link) {
+        hyperlink.setForeground(Color.BLUE.darker());
+        hyperlink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        hyperlink.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    // the user clicks on the label
+                    Desktop.getDesktop().browse(new URI(link));
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(FirstPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(FirstPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // the mouse has entered the label
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // the mouse has exited the label
+            }
+        });
+        hyperlink.setText(link);
+    }
+        
     ComboBoxModel model = new DefaultComboBoxModel(CollegeData.NAMES.toArray());
     /**
      * @param args the command line arguments
@@ -232,34 +324,42 @@ public class FirstPanel extends javax.swing.JFrame {
         for(College college : CollegeData.Data){ //enhanced for loop
             String matchName = college.getName().toLowerCase();
             String matchCity = college.getCity().toLowerCase();
+            String matchState = college.getState().toLowerCase();
             if(matchName.contains(textboxValue.toLowerCase()) 
-                || matchCity.contains(textboxValue.toLowerCase())){
+                || matchCity.contains(textboxValue.toLowerCase())
+                || matchState.contains(textboxValue.toLowerCase())){
                  colleges.add(college);
             }
         } 
-        return colleges;
+        return colleges;   
     }
     
     private void updateCollegeIcon(String iconURL){
             try {
-                URL url = new URL(iconURL);
-                BufferedImage myPicture = ImageIO.read(url);
-                collegeIcon.setIcon(new ImageIcon(myPicture));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(FirstPanel.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
+                URL url = this.getClass().getResource(iconURL);
+                ImageIcon x = new ImageIcon(url);
+                collegeIcon.setIcon(x);
+                collegeIcon.setText(iconURL);
+                iconContainer.setVisible(true);
+            } catch (Exception ex) {
                 Logger.getLogger(FirstPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearButton;
     private javax.swing.JLabel collegeIcon;
     private javax.swing.JTextArea collegeOutput;
     private javax.swing.JComboBox<String> collegesList;
+    private javax.swing.JLabel hyperlink;
+    private javax.swing.JPanel iconContainer;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuBar menu;
     private javax.swing.JButton searchButton;
-    private javax.swing.JTextField searchField;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
