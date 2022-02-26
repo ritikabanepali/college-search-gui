@@ -16,6 +16,13 @@ public class CollegeData {
     
     public static List<College> Data = new ArrayList<>();
     public static List<String> NAMES = new ArrayList<>();
+    public static List<Double> TUITION = new ArrayList<>();
+    public static List<Integer> SIZE = new ArrayList<>();
+    public static List<String> CITY = new ArrayList<>();
+    public static List<Integer> ACCEPTANCERATE = new ArrayList<>();
+    public static List<Integer> GRADRATE = new ArrayList<>();
+    public static List<String> chooseData = new ArrayList<>();
+    
     static {
         
         Data.add(new College("University of Texas at Austin", 10824.0, 50950,
@@ -51,16 +58,41 @@ public class CollegeData {
         "https://www.utdallas.edu/"));
         
         Data.add(new College("Columbia University", 61671.0, 31455,
-        true, true, "New York City", "New York", "10027", "columbiaLogo", 7, 95, 
+        true, true, "New York City", "New York", "10027", "./pics/columbiaLogo.png", 7, 95, 
         "https://www.columbia.edu/"));
         
         Data.add(new College("Georgetown University", 57928.0, 5365,
-        true, true, "Washington DC", "Maryland", "20057", "georgetownLogo", 17, 95, 
+        true, true, "Washington DC", "Maryland", "20057", "./pics/georgetownLogo.png", 17, 95, 
         "https://www.georgetown.edu/"));
+        
+        chooseData.add("Choose Data");
+        chooseData.add("Graduation Rate");
+        chooseData.add("Acceptance Rate");
+        chooseData.add("School Size");
         
         NAMES.add("Search Name, City, or State of School");
         for (College college: Data){
             NAMES.add(college.getName());
+        }
+        
+        for (College college: Data){
+            TUITION.add(college.getTuition());
+        }
+        
+        for (College college: Data){
+            SIZE.add(college.getSize());
+        }
+        
+        for (College college: Data){
+            CITY.add(college.getCity());
+        }
+        
+        for (College college: Data){
+            ACCEPTANCERATE.add(college.getAcceptanceRate());
+        }
+        
+        for (College college: Data){
+            GRADRATE.add(college.getGradRate());
         }
         
         
