@@ -16,6 +16,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -35,8 +37,10 @@ public class FirstPanel extends javax.swing.JFrame {
      * Creates new form FirstPanel
      */
     public FirstPanel() {
+        model = new DefaultComboBoxModel(CollegeData.NAMES.toArray());
+        model2 = new DefaultComboBoxModel(CollegeData.chooseData.toArray());
         initComponents();
-        TableModel table = getTableModel();
+        TableModel table = getTableModel(CollegeData.Data);
         compareTable.setModel(table);
         
     }
@@ -71,7 +75,7 @@ public class FirstPanel extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         compareTable = new javax.swing.JTable();
         chooseData = new javax.swing.JComboBox<>();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        sortButton = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -236,10 +240,10 @@ public class FirstPanel extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("Change to Descending");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        sortButton.setText("Change to Descending");
+        sortButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                sortButtonActionPerformed(evt);
             }
         });
 
@@ -261,7 +265,7 @@ public class FirstPanel extends javax.swing.JFrame {
                         .addGap(158, 158, 158)
                         .addComponent(chooseData, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sortButton, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -275,7 +279,7 @@ public class FirstPanel extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chooseData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1))
+                    .addComponent(sortButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
@@ -350,13 +354,35 @@ public class FirstPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void chooseDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseDataActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_chooseDataActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void sortButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortButtonActionPerformed
+        String fieldSelected = (String)chooseData.getSelectedItem();
+        boolean ascending = true;
+        if(evt.getActionCommand().equals("Change to Descending")){
+            sortButton.setText("Change to Ascending");
+            ascending = false;
+        }
+        else{
+            sortButton.setText("Change to Descending");
+            ascending = true;
+        }
+        TableModel sortedTableModel = getSortedTableModel(fieldSelected, ascending);
+        compareTable.setModel(sortedTableModel);
+    }//GEN-LAST:event_sortButtonActionPerformed
 
+    private TableModel getSortedTableModel(String fieldSelected, boolean ascending){
+        List<College> colleges = CollegeData.Data;
+        Collections.sort(colleges, new Comparator<College>() {
+            @Override
+            public int compare(College first, College second) {
+                return Integer.compare(first.getSize(), second.getSize())*-1;
+            }
+        });
+        return getTableModel(colleges);
+    }
+    
     private void setURL(String link) {
         hyperlink.setForeground(Color.BLUE.darker());
         hyperlink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -386,16 +412,15 @@ public class FirstPanel extends javax.swing.JFrame {
         hyperlink.setText(link);
     }
         
-    ComboBoxModel model = new DefaultComboBoxModel(CollegeData.NAMES.toArray());
-    ComboBoxModel model2 = new DefaultComboBoxModel(CollegeData.chooseData.toArray());
+
     
-    private TableModel  getTableModel(){
+    private TableModel  getTableModel(List<College> colleges){
         
         int col = 6;
-        int row = CollegeData.Data.size();
+        int row = colleges.size();
         String[][] collArray = new String[row][col];
         for(int i=0;i<row;i++){
-            College college = CollegeData.Data.get(i);
+            College college = colleges.get(i);
             collArray[i] = new String[]{college.getName(), college.getCity(),
                     ""+ college.getSize(), ""+college.getTuition(), ""+ 
                     college.getAcceptanceRate() + "%", "" + 
@@ -466,6 +491,8 @@ public class FirstPanel extends javax.swing.JFrame {
                 Logger.getLogger(FirstPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    private ComboBoxModel model;
+    private ComboBoxModel model2;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> chooseData;
     private javax.swing.JButton clearButton;
@@ -487,8 +514,8 @@ public class FirstPanel extends javax.swing.JFrame {
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton searchButton;
+    private javax.swing.JToggleButton sortButton;
     private javax.swing.JTabbedPane tabContainer;
     // End of variables declaration//GEN-END:variables
 }
