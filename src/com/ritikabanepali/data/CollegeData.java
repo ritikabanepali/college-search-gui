@@ -70,7 +70,7 @@ public class CollegeData {
         chooseData.add("Acceptance Rate");
         chooseData.add("School Size");
         
-        NAMES.add("Search Name, City, or State of School");
+        NAMES.add("Search by Name or City");
         for (College college: Data){
             NAMES.add(college.getName());
         }

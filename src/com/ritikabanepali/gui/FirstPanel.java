@@ -30,13 +30,15 @@ import javax.swing.table.TableModel;
  *
  * @author ritik
  */
-public class FirstPanel extends javax.swing.JFrame {
-
+public class FirstPanel extends javax.swing.JFrame {  
     /**
      * Creates new form FirstPanel
      */
     public FirstPanel() {
         initComponents();
+        TableModel table = getTableModel();
+        compareTable.setModel(table);
+        
     }
 
     /**
@@ -309,8 +311,6 @@ public class FirstPanel extends javax.swing.JFrame {
         collegeOutput.setText(null);
         updateCollegeIcon("./pics/entercollegeLogo.png");
         setURL(" ");
-        TableModel table = getTableModel();
-        compareTable.setModel(table);
         // TODO: get rid of scroll bar when less than one college
         // TODO: buttons on compare page
         // TODO: see full size of school in table
@@ -447,10 +447,8 @@ public class FirstPanel extends javax.swing.JFrame {
         for(College college : CollegeData.Data){ //enhanced for loop
             String matchName = college.getName().toLowerCase();
             String matchCity = college.getCity().toLowerCase();
-            String matchState = college.getState().toLowerCase();
             if(matchName.contains(textboxValue.toLowerCase()) 
-                || matchCity.contains(textboxValue.toLowerCase())
-                || matchState.contains(textboxValue.toLowerCase())){
+                || matchCity.contains(textboxValue.toLowerCase())){
                  colleges.add(college);
             }
         } 
