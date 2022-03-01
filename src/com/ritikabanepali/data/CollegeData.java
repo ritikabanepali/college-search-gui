@@ -65,10 +65,27 @@ public class CollegeData {
         true, true, "Washington DC", "Maryland", "20057", "./pics/georgetownLogo.png", 17, 95, 
         "https://www.georgetown.edu/"));
         
+        Data.add(new College("University of Washington", 39114.0, 46081,
+        true, true, "Seattle", "Washington", "98195", "./pics/uwLogo.png", 56, 84, 
+        "https://www.washington.edu/"));
+        
+        Data.add(new College("Seattle University", 48390.0, 7405,
+        true, true, "Seattle", "Washington", "98122", "./pics/suLogo.png", 83, 76, 
+        "https://www.seattleu.edu/"));
+        
+        Data.add(new College("University of California San Diego", 44402.0, 39821,
+        true, true, "San Diego", "California", "92093", "./pics/ucsdLogo.png", 37, 85, 
+        "https://www.ucsd.edu/"));
+        
+        Data.add(new College("Boston University", 58072.0, 32551,
+        true, true, "Boston", "Massachusetts", "02215", "./pics/buLogo.png", 20, 87, 
+        "https://www.bu.edu/"));
+        
         chooseData.add("Choose Data");
         chooseData.add("Graduation Rate");
         chooseData.add("Acceptance Rate");
         chooseData.add("School Size");
+        chooseData.add("Tuition");
         
         NAMES.add("Search by Name or City");
         for (College college: Data){

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
@@ -37,8 +36,8 @@ public class FirstPanel extends javax.swing.JFrame {
      * Creates new form FirstPanel
      */
     public FirstPanel() {
-        model = new DefaultComboBoxModel(CollegeData.NAMES.toArray());
-        model2 = new DefaultComboBoxModel(CollegeData.chooseData.toArray());
+        searchComboBox = new DefaultComboBoxModel(CollegeData.NAMES.toArray());
+        compareComboBox = new DefaultComboBoxModel(CollegeData.chooseData.toArray());
         initComponents();
         TableModel table = getTableModel(CollegeData.Data);
         compareTable.setModel(table);
@@ -144,7 +143,7 @@ public class FirstPanel extends javax.swing.JFrame {
 
         collegesList.setEditable(true);
         collegesList.setForeground(new java.awt.Color(104, 86, 59));
-        collegesList.setModel(model);
+        collegesList.setModel(searchComboBox);
         collegesList.setToolTipText("Enter name, state, or city of school");
         collegesList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,8 +231,8 @@ public class FirstPanel extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(compareTable);
 
-        chooseData.setModel(model2);
-        chooseData.setSelectedItem(model2);
+        chooseData.setModel(compareComboBox);
+        chooseData.setSelectedItem(compareComboBox);
         chooseData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chooseDataActionPerformed(evt);
@@ -315,9 +314,6 @@ public class FirstPanel extends javax.swing.JFrame {
         collegeOutput.setText(null);
         updateCollegeIcon("./pics/entercollegeLogo.png");
         setURL(" ");
-        // TODO: get rid of scroll bar when less than one college
-        // TODO: buttons on compare page
-        // TODO: see full size of school in table
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -338,7 +334,7 @@ public class FirstPanel extends javax.swing.JFrame {
                     + c.getState()
                     + " " +c.getZipcode()
                     +"\n Tuition: $" + c.getTuition()
-                    + "\n College Size: " + c.getSize() + "people"
+                    + "\n College Size: " + c.getSize() + " people"
                     + "\n Has Bachelors Program? "
                     + c.getHasBachelors()
                     + "\n Has Masters Program? "
@@ -377,7 +373,34 @@ public class FirstPanel extends javax.swing.JFrame {
         Collections.sort(colleges, new Comparator<College>() {
             @Override
             public int compare(College first, College second) {
+                if(fieldSelected.equals("Choose Data")){
+                    return 0;
+                }
+                else if (fieldSelected.equals("School Size") && ascending == false){
                 return Integer.compare(first.getSize(), second.getSize())*-1;
+                }
+                else if(fieldSelected.equals("School Size") && ascending == true){
+                return Integer.compare(first.getSize(), second.getSize());
+                }
+                else if(fieldSelected.equals("Graduation Rate") && ascending == false){
+                    return Integer.compare(first.getGradRate(), second.getGradRate())*-1;
+                }
+                else if(fieldSelected.equals("Graduation Rate") && ascending == true){
+                    return Integer.compare(first.getGradRate(), second.getGradRate());
+                }
+                else if(fieldSelected.equals("Acceptance Rate") && ascending == false){
+                    return Integer.compare(first.getAcceptanceRate(), second.getAcceptanceRate())*-1;
+                }
+                else if(fieldSelected.equals("Acceptance Rate") && ascending == true){
+                    return Integer.compare(first.getAcceptanceRate(), second.getAcceptanceRate());
+                }
+                else if(fieldSelected.equals("Tuition") && ascending == false){
+                    return Double.compare(first.getTuition(), second.getTuition())*-1;
+                }
+                else if(fieldSelected.equals("Tuition") && ascending == true){
+                    Double.compare(first.getTuition(), second.getTuition());
+                }
+                return  Double.compare(first.getTuition(), second.getTuition());
             }
         });
         return getTableModel(colleges);
@@ -423,11 +446,11 @@ public class FirstPanel extends javax.swing.JFrame {
             College college = colleges.get(i);
             collArray[i] = new String[]{college.getName(), college.getCity(),
                     ""+ college.getSize(), ""+college.getTuition(), ""+ 
-                    college.getAcceptanceRate() + "%", "" + 
-                    college.getGradRate() + "%"};
+                    college.getAcceptanceRate() , "" + 
+                    college.getGradRate() };
         }     
          String[] columns = {"College Name", "City", "School Size (people)",
-             "Tuition ($)", "Acceptance Rate", "Graduation Rate"};
+             "Tuition ($)", "Acceptance Rate (%)", "Graduation Rate (%)"};
         
         TableModel tm = new DefaultTableModel(collArray, columns);
         return tm;
@@ -491,8 +514,8 @@ public class FirstPanel extends javax.swing.JFrame {
                 Logger.getLogger(FirstPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    private ComboBoxModel model;
-    private ComboBoxModel model2;
+    private ComboBoxModel searchComboBox;
+    private ComboBoxModel compareComboBox;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> chooseData;
     private javax.swing.JButton clearButton;
