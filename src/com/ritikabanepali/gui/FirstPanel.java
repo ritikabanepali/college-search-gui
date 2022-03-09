@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package com.ritikabanepali.gui;
 
-package com.findcollege.gui;
-
-import com.findcollege.data.College;
-import com.findcollege.data.CollegeData;
+import com.ritikabanepali.data.College;
+import com.ritikabanepali.data.CollegeData;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -16,12 +15,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -30,7 +29,7 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author ritika
+ * @author ritik
  */
 public class FirstPanel extends javax.swing.JFrame {  
     /**
@@ -138,7 +137,7 @@ public class FirstPanel extends javax.swing.JFrame {
         collegesList.setEditable(true);
         collegesList.setForeground(new java.awt.Color(104, 86, 59));
         collegesList.setModel(searchComboBox);
-        collegesList.setToolTipText("Enter name or city of school");
+        collegesList.setToolTipText("Enter name, state, or city of school");
         collegesList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 collegesListActionPerformed(evt);
