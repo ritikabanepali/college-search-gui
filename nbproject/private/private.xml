@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ritik/OneDrive/Documents/NetBeansProjects/InternalAssessment/src/com/ritikabanepali/data/CollegeData.java</file>
-            <file>file:/C:/Users/ritik/OneDrive/Documents/NetBeansProjects/InternalAssessment/src/com/ritikabanepali/gui/FirstPanel.java</file>
-            <file>file:/C:/Users/ritik/OneDrive/Documents/NetBeansProjects/InternalAssessment/src/com/ritikabanepali/data/College.java</file>
-            <file>file:/C:/Users/ritik/OneDrive/Documents/NetBeansProjects/InternalAssessment/src/com/ritikabanepali/gui/pics/entercollegeLogo.png</file>
+            <file>file:/C:/Users/ritik/OneDrive/Documents/NetBeansProjects/InternalAssessment/src/com/findcollege/gui/FirstPanel.java</file>
+            <file>file:/C:/Users/ritik/OneDrive/Documents/NetBeansProjects/InternalAssessment/src/com/findcollege/data/CollegeData.java</file>
         </group>
     </open-files>
 </project-private>

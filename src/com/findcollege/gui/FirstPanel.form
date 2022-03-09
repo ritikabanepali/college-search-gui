@@ -233,7 +233,7 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="searchComboBox" type="code"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Enter name, state, or city of school"/>
+                <Property name="toolTipText" type="java.lang.String" value="Enter name or city of school"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="collegesListActionPerformed"/>
